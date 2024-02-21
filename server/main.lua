@@ -69,6 +69,10 @@ RegisterNetEvent('qb-cityhall:server:requestId', function(item, hall)
         info.firstname = Player.PlayerData.charinfo.firstname
         info.lastname = Player.PlayerData.charinfo.lastname
         info.birthdate = Player.PlayerData.charinfo.birthdate
+    elseif item == 'viplicense' then
+        info.firstname = Player.PlayerData.charinfo.firstname
+        info.lastname = Player.PlayerData.charinfo.lastname
+        info.birthdate = Player.PlayerData.charinfo.birthdate
     else
         return false -- DropPlayer(src, 'Attempted exploit abuse')
     end
@@ -88,14 +92,13 @@ RegisterNetEvent('qb-cityhall:server:sendDriverTest', function(instructors)
         else
             local mailData = {
                 sender = 'Township',
-                subject = 'Driving lessons request',
-                message = 'Hello,<br><br>We have just received a message that someone wants to take driving lessons.<br>If you are willing to teach, please contact them:<br>Name: <strong>' .. Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname .. '<br />Phone Number: <strong>' .. Player.PlayerData.charinfo.phone .. '</strong><br><br>Kind regards,<br>Township Los Santos',
-                button = {}
+                subject = 'Solicitação de aulas de direção',
+                message = 'Olá,<br><br>Acabamos de receber uma mensagem de que alguém deseja fazer aulas de direção.<br>Se você deseja dar aulas, entre em contato:<br>Nome: <strong>' .. Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname .. '<br />Número de telefone: <strong>' .. Player.PlayerData.charinfo.phone .. '</strong><br ><br>Atenciosamente,<br>Município Los Santos',
             }
-            exports['qb-phone']:sendNewMailToOffline(citizenid, mailData)
+            TriggerClientEvent('qb-phone:client:sendNewMail', citizenid, mailData)
         end
     end
-    TriggerClientEvent('QBCore:Notify', src, 'An email has been sent to driving schools, and you will be contacted automatically', 'success', 5000)
+    TriggerClientEvent('QBCore:Notify', src, 'Um e-mail foi enviado para autoescolas e você será contatado automaticamente', 'success', 5000)
 end)
 
 RegisterNetEvent('qb-cityhall:server:ApplyJob', function(job, cityhallCoords)
